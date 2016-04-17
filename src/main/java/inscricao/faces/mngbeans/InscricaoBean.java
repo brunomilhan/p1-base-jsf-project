@@ -5,24 +5,26 @@ import inscricao.entity.Idioma;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.model.SelectItem;
+import javax.inject.Named;
 import utfpr.faces.support.PageBean;
 
 /**
  *
  * @author Wilson
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class InscricaoBean extends PageBean {
-    private static final Idioma[] idiomas = {
+    
+    private static final Idioma[] IDIOMAS = {
         new Idioma(1, "Inglês"),
         new Idioma(2, "Alemão"),
         new Idioma(3, "Francês")
     };
-    private Candidato candidato = new Candidato(idiomas[0]); // inicialmente ingles
+    
+    private Candidato candidato = new Candidato(IDIOMAS[0]); // inicialmente ingles
     private List<SelectItem> idiomaItemList;
 
     public Candidato getCandidato() {
@@ -33,10 +35,14 @@ public class InscricaoBean extends PageBean {
         this.candidato = candidato;
     }
 
+    public Idioma[] getIdiomas() {
+        return IDIOMAS;
+    }
+    
     public List<SelectItem> getIdiomaItemList() {
         if (idiomaItemList != null) return idiomaItemList;
         idiomaItemList = new ArrayList<>();
-        for (Idioma id: idiomas) {
+        for (Idioma id: IDIOMAS) {
             idiomaItemList.add(new SelectItem(id.getCodigo(), id.getDescricao()));
         }
         return idiomaItemList;
@@ -44,7 +50,7 @@ public class InscricaoBean extends PageBean {
 
     public String confirmaAction() {
         candidato.setDataHora(new Date());
-        candidato.setIdioma(idiomas[candidato.getIdioma().getCodigo()-1]);
+        candidato.setIdioma(IDIOMAS[candidato.getIdioma().getCodigo()-1]);
         return "confirma";
     }
 }

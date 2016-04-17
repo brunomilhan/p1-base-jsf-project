@@ -4,10 +4,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                template="./WEB-INF/templates/layout.xhtml">
+                template="/WEB-INF/templates/layout.xhtml">
 
     <ui:define name="styles">
-        <link href="./css/inscricao.css" rel="stylesheet" type="text/css" />
+        <link href="#{request.contextPath}/css/inscricao.css" rel="stylesheet" type="text/css" />
     </ui:define>
 
     <ui:define name="metadata">
@@ -23,12 +23,12 @@
                 <h:panelGroup styleClass="form-block" layout="block">
                     <h:outputLabel for="idioma" value="Idioma"/>
                     <h:selectOneMenu id="idioma" value="#{inscricaoBean.candidato.idioma.codigo}" style="width:12em">
-                        <f:selectItems value="#{inscricaoBean.idiomaItemList}"/>
+                        <f:selectItems value="#{inscricaoBean.idiomas}" var="i" itemValue="#{i.codigo}" itemLabel="#{i.descricao}"/>
                     </h:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup styleClass="form-block" layout="block">
                     <h:outputLabel for="cpf" value="CPF"/>
-                    <h:inputText id="cpf" value="#{inscricaoBean.candidato.cpf}" label="CPF" size="15" required="true"/>
+                    <h:inputText id="cpf" value="#{inscricaoBean.candidato.cpf}" label="CPF" size="15" maxlength="11" required="true"/>
                     <h:outputLabel for="rg" value="RG"/>
                     <h:inputText id="rg" value="#{inscricaoBean.candidato.rg}" size="25" label="RG" maxlength="20" required="true"/>
                 </h:panelGroup>
@@ -45,14 +45,42 @@
                 <h:panelGroup styleClass="form-block" layout="block">
                     <h:outputLabel for="cidade" value="Cidade"/>
                     <h:inputText id="cidade" value="#{inscricaoBean.candidato.cidade}" size="50"
-                            styleClass="ui-inputfield" label="cidade" maxlength="50" required="true"/>
+                                 label="Cidade" maxlength="50" required="true"/>
                     <h:outputLabel for="estado" value="Estado"/>
-                    <h:inputText id="estado" value="#{inscricaoBean.candidato.estado}" size="4"
-                            styleClass="ui-inputfield" label="Estado" maxlength="2" required="true"/>
+                    <h:selectOneMenu id="estado" value="#{inscricaoBean.candidato.estado}" label="Estado" required="true">
+                        <f:selectItem itemLabel="" itemValue="${null}" noSelectionOption="true"/>
+                        <f:selectItem itemLabel="AC" itemValue="AC"/>
+                        <f:selectItem itemLabel="AL" itemValue="AL"/>
+                        <f:selectItem itemLabel="AM" itemValue="AM"/>
+                        <f:selectItem itemLabel="AP" itemValue="AP"/>
+                        <f:selectItem itemLabel="BA" itemValue="BA"/>
+                        <f:selectItem itemLabel="CE" itemValue="CE"/>
+                        <f:selectItem itemLabel="DF" itemValue="DF"/>
+                        <f:selectItem itemLabel="ES" itemValue="ES"/>
+                        <f:selectItem itemLabel="GO" itemValue="GO"/>
+                        <f:selectItem itemLabel="MA" itemValue="MA"/>
+                        <f:selectItem itemLabel="MG" itemValue="MG"/>
+                        <f:selectItem itemLabel="MS" itemValue="MS"/>
+                        <f:selectItem itemLabel="MT" itemValue="MT"/>
+                        <f:selectItem itemLabel="PA" itemValue="PA"/>
+                        <f:selectItem itemLabel="PB" itemValue="PB"/>
+                        <f:selectItem itemLabel="PE" itemValue="PE"/>
+                        <f:selectItem itemLabel="PI" itemValue="PI"/>
+                        <f:selectItem itemLabel="PR" itemValue="PR"/>
+                        <f:selectItem itemLabel="RJ" itemValue="RJ"/>
+                        <f:selectItem itemLabel="RN" itemValue="RN"/>
+                        <f:selectItem itemLabel="RO" itemValue="RO"/>
+                        <f:selectItem itemLabel="RR" itemValue="RR"/>
+                        <f:selectItem itemLabel="RS" itemValue="RS"/>
+                        <f:selectItem itemLabel="SC" itemValue="SC"/>
+                        <f:selectItem itemLabel="SE" itemValue="SE"/>
+                        <f:selectItem itemLabel="SP" itemValue="SP"/>
+                        <f:selectItem itemLabel="TO" itemValue="TO"/>
+                    </h:selectOneMenu>
                 </h:panelGroup>
                 <h:panelGroup styleClass="form-block" layout="block">
                     <h:outputLabel for="cep" value="CEP"/>
-                    <h:inputText id="cep" value="#{inscricaoBean.candidato.cep}" label="CEP" size="10" required="true"/>
+                    <h:inputText id="cep" value="#{inscricaoBean.candidato.cep}" label="CEP" size="10" maxlength="8" required="true"/>
                     <h:outputLabel for="bairro" value="Bairro"/>
                     <h:inputText id="bairro" value="#{inscricaoBean.candidato.bairro}" size="30" label="Bairro" maxlength="50"/>
                 </h:panelGroup>
@@ -70,15 +98,17 @@
                 <h:panelGroup styleClass="form-block" layout="block">
                     <h:outputLabel for="instituicao" value="Instituição"/>
                     <h:inputText id="instituicao" value="#{inscricaoBean.candidato.instituicao}" size="80"
-                          styleClass="ui-inputfield" label="Instituição" maxlength="100" required="true"/>
+                          label="Instituição" maxlength="100" required="true"/>
                 </h:panelGroup>
                 <h:panelGroup styleClass="form-block" layout="block">
                     <h:outputLabel for="programa" value="Programa"/>
                     <h:inputText id="programa" value="#{inscricaoBean.candidato.programa}" size="80"
-                          styleClass="ui-inputfield" label="Programa" maxlength="100" required="true"/>
+                          label="Programa" maxlength="100" required="true"/>
                 </h:panelGroup>
             </h:panelGroup>
-            <h:commandButton value="Confirmar Inscrição" action="#{inscricaoBean.confirmaAction}"/>
+            <div class="submit">
+                <h:commandButton value="Confirmar Inscrição" action="#{inscricaoBean.confirmaAction}"/>
+            </div>
             <h:messages/>
         </h:form>
     </ui:define>

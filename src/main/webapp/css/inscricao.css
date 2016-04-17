@@ -2,6 +2,7 @@
     font-size: 14pt;
     font-weight: bold;
     margin: 10px 0;
+    text-align: center;
 }
 
 .form-block {
@@ -12,4 +13,13 @@ label {
     font-size: 10pt;
     margin-left: 1em;
     margin-right: 0.25em;
+}
+
+label:after {
+    content: ":";
+}
+
+div.submit {
+    margin-top: 1em;
+    text-align: center;
 }
