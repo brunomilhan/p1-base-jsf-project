@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.model.ArrayDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import utfpr.faces.support.PageBean;
@@ -26,6 +27,7 @@ public class InscricaoBean extends PageBean {
     
     private Candidato candidato = new Candidato(IDIOMAS[0]); // inicialmente ingles
     private List<SelectItem> idiomaItemList;
+    private ArrayDataModel<Idioma> idiomasDataModel;
 
     public Candidato getCandidato() {
         return candidato;
@@ -46,6 +48,13 @@ public class InscricaoBean extends PageBean {
             idiomaItemList.add(new SelectItem(id.getCodigo(), id.getDescricao()));
         }
         return idiomaItemList;
+    }
+    
+    public ArrayDataModel<Idioma> getIdiomasDataModel() {
+        if (idiomasDataModel == null) {
+            idiomasDataModel = new ArrayDataModel<>(IDIOMAS);
+        }
+        return idiomasDataModel;
     }
 
     public String confirmaAction() {
