@@ -65,6 +65,6 @@ public class InscricaoBean extends PageBean {
         candidato.setDataHora(new Date());
         candidato.setIdioma(IDIOMAS[candidato.getIdioma().getCodigo()-1]);
         registroBean.save(candidato);
-        return "candidatos";
+        return "confirma";
     }
 }
