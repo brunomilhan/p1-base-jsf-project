@@ -8,6 +8,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.model.ArrayDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 import javax.inject.Named;
 import utfpr.faces.support.PageBean;
 
@@ -18,6 +19,9 @@ import utfpr.faces.support.PageBean;
 @Named
 @RequestScoped
 public class InscricaoBean extends PageBean {
+
+    @Inject
+    private RegistroBean registroBean = new RegistroBean();
     
     private static final Idioma[] IDIOMAS = {
         new Idioma(1, "Inglês"),
@@ -60,6 +64,7 @@ public class InscricaoBean extends PageBean {
     public String confirmaAction() {
         candidato.setDataHora(new Date());
         candidato.setIdioma(IDIOMAS[candidato.getIdioma().getCodigo()-1]);
-        return "confirma";
+        registroBean.save(candidato);
+        return "candidatos";
     }
 }

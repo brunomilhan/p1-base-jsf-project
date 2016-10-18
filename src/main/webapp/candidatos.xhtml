@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="styles">
+        <link href="#{request.contextPath}/css/inscricao.css" rel="stylesheet" type="text/css"/>
+    </ui:define>
+
+    <ui:define name="metadata">
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+<!--
+    Crie a página candidatos.xhtml em JSF na raiz da sua aplicação contendo
+    um h:dataTable que exiba o CPF, nome, cidade e estado de todos os candidatos inscritos.
+-->
+
+    <ui:define name="content">
+        <h:form>
+            <h:dataTable value="#{registroBean.candidatoList}" var="cand">
+                <h:column >
+                    <h:outputLabel for="cpf" value="cpf: " />
+                    <h:outputText id="cpf" value="#{cand.cpf}" />
+                    <h:outputLabel for="nome" value="nome: " />
+                    <h:outputText id="nome" value="#{cand.nome}" />
+                    <h:outputLabel for="cidade" value="cidade: " />
+                    <h:outputText id="cidade" value="#{cand.cidade}" />
+                    <h:outputLabel for="estado" value="estado: " />
+                    <h:outputText id="estado" value="#{cand.estado}" />
+                </h:column>
+            </h:dataTable>
+            <h:messages/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
