@@ -28,7 +28,8 @@
                 </h:panelGroup>
                 <h:panelGroup styleClass="form-block" layout="block">
                     <h:outputLabel for="cpf" value="CPF"/>
-                    <h:inputText id="cpf" value="#{inscricaoBean.candidato.cpf}" label="CPF" size="15" maxlength="11" required="true">
+                    <h:inputText id="cpf" value="#{inscricaoBean.candidato.cpf}" label="CPF" size="15" maxlength="11" required="true"
+                    converter="cpfConverter">
                         <f:validator validatorId="cpfValidator" />
                     </h:inputText>
                     <h:outputLabel for="rg" value="RG"/>
